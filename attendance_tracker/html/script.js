@@ -88,5 +88,4 @@ async function fetchAttendance() {
     }
 }
 
-// Automatically fetch attendance records when the dashboard is displayed
 document.getElementById("dashboard").addEventListener("click", fetchAttendance);
