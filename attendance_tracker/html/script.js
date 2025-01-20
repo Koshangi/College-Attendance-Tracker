@@ -1,7 +1,6 @@
-// URL of the backend server
+
 const BASE_URL = "http://localhost:3031";
 
-// Function to handle login
 async function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
@@ -29,7 +28,6 @@ async function login() {
     }
 }
 
-// Function to mark attendance
 async function markAttendance() {
     const studentName = prompt("Enter Student Name:");
     const attendanceStatus = prompt("Enter Status (Present/Absent):");
@@ -60,7 +58,6 @@ async function markAttendance() {
     }
 }
 
-// Function to fetch attendance records
 async function fetchAttendance() {
     try {
         const response = await fetch(`${BASE_URL}/attendance`, {
@@ -71,10 +68,8 @@ async function fetchAttendance() {
             const records = await response.json();
             const attendanceTable = document.getElementById("attendanceTable");
 
-            // Clear existing rows
             attendanceTable.innerHTML = "";
 
-            // Populate table with new data
             records.forEach((record) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
