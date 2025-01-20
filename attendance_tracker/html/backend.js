@@ -7,11 +7,9 @@ const path = require('path');
 const app = express();
 const PORT = 3031;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// SQLite database setup
 const db = new sqlite3.Database('./attendance.db', (err) => {
     if (err) {
         console.error('Error connecting to the database:', err.message);
@@ -20,7 +18,6 @@ const db = new sqlite3.Database('./attendance.db', (err) => {
     }
 });
 
-// Initialize database tables
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS students (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,15 +33,12 @@ db.serialize(() => {
     )`);
 });
 
-// Serve static files
 app.use(express.static(path.join(__dirname, 'html'))); // Change 'public' to the actual directory containing your frontend files
 
-// Serve the main HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'attandance.html'));
 });
 
-// API routes
 app.get('/students', (req, res) => {
     db.all('SELECT * FROM students', [], (err, rows) => {
         if (err) {
